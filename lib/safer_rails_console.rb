@@ -59,8 +59,6 @@ module SaferRailsConsole
   end
 
   class Configuration
-    include ActiveSupport::Configurable
-
     CONFIG_DEFAULTS = {
         console: 'irb',
         environment_names: {
@@ -82,7 +80,7 @@ module SaferRailsConsole
     }.freeze
 
     CONFIG_DEFAULTS.each do |name, value|
-      config_accessor(name) { value }
+      class_attribute(name) { value }
     end
 
     def set(**new_config)
